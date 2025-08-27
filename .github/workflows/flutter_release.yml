@@ -3,14 +3,14 @@ name: Flutter Release
 on:
   push:
     tags:
-      - 'v*.*.*'   # запуск при пуше тега v1.0.0, v1.0.1 и т.п.
+      - "v*.*.*"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Flutter
@@ -18,13 +18,13 @@ jobs:
         with:
           flutter-version: '3.16.0'
 
-      - name: Install dependencies
+      - name: Get dependencies
         run: flutter pub get
 
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload to GitHub Release
+      - name: Upload to Release
         uses: softprops/action-gh-release@v1
         with:
           files: build/app/outputs/flutter-apk/app-release.apk
